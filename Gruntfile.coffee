@@ -4,12 +4,13 @@ module.exports = (grunt) ->
   grunt.initConfig({
     express: {
       server: {
-        bases: ['public']
-        debug: true
-        server: path.resolve('./server.coffee')
-        monitor: {
-          command: 'coffee'
-          watch: true
+        options: {
+          bases: path.resolve('web/public')
+          debug: true
+          server: path.resolve('./server.coffee')
+          monitor: {
+            command: 'coffee'
+          }
         }
       }
     }
@@ -48,6 +49,10 @@ module.exports = (grunt) ->
         files: 'web/**/*.coffee'
         tasks: ['coffee']
       }
+      jade: {
+        files: 'web/templates/*.jade'
+        tasks: ['jade']
+      }
     }
 
   })
@@ -60,3 +65,5 @@ module.exports = (grunt) ->
 
   grunt.registerTask('build', 'coffee jade stylus requirejs')
   grunt.registerTask('build-dev', 'coffee jade')
+  grunt.registerTask('default', ['express', 'watch'])
+

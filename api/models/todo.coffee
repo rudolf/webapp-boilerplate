@@ -2,7 +2,8 @@ mongoose = require('mongoose')
 Schema = mongoose.Schema
 
 TodoSchema = new Schema({
-  #Attributes
+  title: String
+  done: Boolean
 })
 
 return mongoose.model('Todo', TodoSchema)

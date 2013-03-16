@@ -1,8 +1,11 @@
 http = require("http")
 express = require("express")
 todos = require("./api/routes/todos")
+mongoose = require('mongoose')
 #http = require("http")
 path = require("path")
+
+mongoose.connect('localhost', 'test')
 
 app = express()
 app.configure(() ->
@@ -15,16 +18,18 @@ app.configure(() ->
 )
 
 app.configure("development", () ->
-  app.use express.errorHandler()
+  app.use(express.errorHandler())
 )
 
 #app.get("/", routes.index)
 app.get("/todos", todos.list)
-
-console.log('hello world')
+app.put("/todos", todos.post)
+app.put("/todos/:id", todos.put)
 
 module.exports = app
 
+### Handled by grunt-express
 http.createServer(app).listen(app.get("port"), () ->
   console.log "Express server listening on port " + app.get("port")
 )
+###

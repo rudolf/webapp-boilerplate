@@ -1,6 +1,6 @@
 define((require) ->
   Marionette = require('marionette')
-  TemplateView = require('views/template')
+  TodoListView = require('views/todolist')
   
   Router = Marionette.AppRouter.extend({
     routes: {
@@ -8,8 +8,7 @@ define((require) ->
     }
     index: () ->
       app = require('app')
-      app.content.show(new TemplateView())
-      console.log('show index')
+      app.content.show(new TodoListView())
   })
 
   return new Router()
